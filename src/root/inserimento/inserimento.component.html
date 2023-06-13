@@ -1,0 +1,20 @@
+<!--visualizzazione della view di inserimento-->
+<div *ngIf="view == 'viewInserimento'">
+  <b>Inserisci nuovo libro</b>
+  <br /><br />
+
+  <!--<input id="nuovo" (keyup.enter)="newBook()" />-->
+
+  <form>
+    <label for="nuovoAutore">Autore: </label>
+    <input id="nuovoAutore" /><br /><br />
+    <label for="nuovoTitolo">Titolo: </label>
+    <input id="nuovoTitolo" /><br /><br />
+    <label for="nuovoPosizione">Posizione: </label>
+    <input id="nuovoPosizione" />
+    <br /><br />
+    <input type="submit" value="Inserisci" />
+  </form>
+  <br />
+  <button (click)="newView('viewHome')">Torna alla home</button>
+</div>

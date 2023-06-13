@@ -1,6 +1,12 @@
-<div>
-  <br />
-  <button>Inserisci un nuovo libro</button>
+<!--visualizzazione della home page-->
+<div *ngIf="view == 'viewHome'">
+  <button (click)="newView('viewInserimento')">Inserisci un nuovo libro</button>
   <br /><br />
-  <button>Cerca</button>
+  <button (click)="newView('viewRicerca')">Cerca</button>
+</div>
+<div *ngIf="view == 'viewInserimento'">
+  <app-inserimento (updateView)="newView($event)"> </app-inserimento>
+</div>
+<div *ngIf="view == 'viewRicerca'">
+  <app-ricerca (updateView)="newView($event)"> </app-ricerca>
 </div>
