@@ -12,18 +12,12 @@ export class RicercaComponent implements OnInit {
   @Output() updateView = new EventEmitter<string>();
   view: string = 'viewRicerca';
 
-  newView(name: string) {
-    this.view = name;
-    this.updateView.emit(this.view);
-  }
-
   constructor() {}
 
   ngOnInit() {}
-  newBook() {
-    var input: HTMLInputElement = document.getElementById(
-      'nuovo'
-    ) as HTMLInputElement;
-    input.value = '';
+
+  newView(name: string) {
+    this.view = name;
+    this.updateView.emit(this.view);
   }
 }

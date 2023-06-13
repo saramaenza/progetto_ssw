@@ -12,18 +12,31 @@ export class InserimentoComponent implements OnInit {
   @Output() updateView = new EventEmitter<string>();
   view: string = 'viewInserimento';
 
+  constructor() {}
+
+  ngOnInit() {}
+
   newView(name: string) {
     this.view = name;
     this.updateView.emit(this.view);
   }
 
-  constructor() {}
-
-  ngOnInit() {}
   newBook() {
-    var input: HTMLInputElement = document.getElementById(
-      'nuovo'
+    var inputAutore: HTMLInputElement = document.getElementById(
+      'nuovoAutore'
     ) as HTMLInputElement;
-    input.value = '';
+    var newAutore = inputAutore.value;
+
+    var inputTitolo: HTMLInputElement = document.getElementById(
+      'nuovoTitolo'
+    ) as HTMLInputElement;
+    var newTitolo = inputTitolo.value;
+
+    var inputPosizione: HTMLInputElement = document.getElementById(
+      'nuovaPosizione'
+    ) as HTMLInputElement;
+    var newPosizione = inputPosizione.value;
+
+    console.log(newAutore, newTitolo, newPosizione);
   }
 }

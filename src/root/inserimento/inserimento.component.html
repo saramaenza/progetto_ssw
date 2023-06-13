@@ -6,14 +6,14 @@
   <!--<input id="nuovo" (keyup.enter)="newBook()" />-->
 
   <form>
-    <label for="nuovoAutore">Autore: </label>
+    <label for="autore">Autore: </label>
     <input id="nuovoAutore" /><br /><br />
-    <label for="nuovoTitolo">Titolo: </label>
+    <label for="titolo">Titolo: </label>
     <input id="nuovoTitolo" /><br /><br />
-    <label for="nuovoPosizione">Posizione: </label>
-    <input id="nuovoPosizione" />
+    <label for="posizione">Posizione: </label>
+    <input id="nuovaPosizione" />
     <br /><br />
-    <input type="submit" value="Inserisci" />
+    <button (click)="newBook()">Inserisci</button>
   </form>
   <br />
   <button (click)="newView('viewHome')">Torna alla home</button>
