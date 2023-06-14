@@ -26,6 +26,7 @@ export class InserimentoComponent implements OnInit {
   }
 
   newBook() {
+    //recupero dei valori dal form
     var inputAutore: HTMLInputElement = document.getElementById(
       'nuovoAutore'
     ) as HTMLInputElement;
@@ -43,14 +44,11 @@ export class InserimentoComponent implements OnInit {
 
     let newLibro = new Libro(newTitolo, newAutore, newPosizione, '');
 
-    console.log(newLibro);
-
     this.as.getData().subscribe({
       next: (x: AjaxResponse<any>) => {
-        // JSON:parse -> parsing per avere l'array
-        //'archivio' è l'archivio attuale recuperato dal server
+        //recupero dal server dell'archivio
         let archivio: Archivio = new Archivio(JSON.parse(x.response));
-        //aggiungo il nuovo libro in archivio (in locale)
+        //aggiungo il nuovo libro in archivio
         archivio.inserisci_libro(newLibro);
         //aggiorno il nuovo archivio sul server
         this.as.setData(JSON.stringify(archivio)).subscribe({
