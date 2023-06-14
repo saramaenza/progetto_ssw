@@ -34,6 +34,8 @@ export class Archivio {
   }
 
   inserisci_libro(libro: Libro) {
+    console.log('LIBRO', libro);
+    console.log('ARCH2', this.archivio);
     this.archivio.push(libro);
   }
 }
