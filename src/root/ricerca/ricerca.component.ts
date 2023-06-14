@@ -14,6 +14,7 @@ import { PrestitoComponent } from './prestito/prestito.component';
 })
 export class RicercaComponent implements OnInit {
   @Output() updateView = new EventEmitter<string>();
+
   view: string = 'viewRicerca';
   numero: number = 0;
   titoloTrovato: string = '';

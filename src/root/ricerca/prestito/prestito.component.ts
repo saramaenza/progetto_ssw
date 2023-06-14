@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { AjaxResponse } from 'rxjs/ajax';
+import { Archivio } from '../../archivio';
+import { archivio_service } from '../../archivio.service';
 
 @Component({
   selector: 'app-prestito',
@@ -10,9 +13,22 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PrestitoComponent implements OnInit {
   @Input() utenteTrovato: string;
-  constructor() {}
+
+  constructor(private as: archivio_service) {}
 
   ngOnInit() {}
 
-  restituzione() {}
+  restituzione() {
+    console.log('restituisci');
+    /*
+    //download dell'archivio
+    this.as.getData().subscribe({
+      next: (x: AjaxResponse<any>) => {
+        let archivio: Archivio = new Archivio(JSON.parse(x.response).archivio);
+        console.log(archivio);
+      },
+      error: (err) =>
+        console.error('Observer got an error: ' + JSON.stringify(err)),
+    });*/
+  }
 }
