@@ -7,3 +7,9 @@
   <p id="numOccorrenze">{{ numero }} corrispondenze</p>
   <button (click)="newView('viewHome')">Torna alla home</button>
 </div>
+<div *ngIf="view == 'viewRisultato'">
+  <b>Documento trovato:</b>
+  <p><i id="posizione"></i></p>
+  <p>Titolo: <i id="titolo"></i></p>
+  <p>Autore: <i id="autore"> </i></p>
+</div>

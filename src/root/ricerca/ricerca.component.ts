@@ -43,9 +43,11 @@ export class RicercaComponent implements OnInit {
         let trovati = archivio.ricerca_libro(stringa);
         if (stringa.length > 0) {
           this.numero = trovati.length;
-        }
-        else {
+        } else {
           this.numero = 0;
+        }
+        if (this.numero == 1) {
+          this.view = 'viewRisultato';
         }
       },
       error: (err) =>
