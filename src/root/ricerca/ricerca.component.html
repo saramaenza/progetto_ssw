@@ -5,11 +5,23 @@
 
   <input (keyup)="cerca()" id="stringa" />
   <p id="numOccorrenze">{{ numero }} corrispondenze</p>
-  <button (click)="newView('viewHome')">Torna alla home</button>
 </div>
 <div *ngIf="view == 'viewRisultato'">
   <b>Documento trovato:</b>
-  <p><i id="posizione"></i></p>
-  <p>Titolo: <i id="titolo"></i></p>
-  <p>Autore: <i id="autore"> </i></p>
+  <p>
+    Posizione: <i id="posizione">{{ posizioneTrovato }}</i>
+  </p>
+  <p>
+    Titolo: <i id="titolo">{{ titoloTrovato }}</i>
+  </p>
+  <p>
+    Autore: <i id="autore">{{ autoreTrovato }}</i>
+  </p>
+  <p *ngIf="utenteTrovato; else utenteNonTrovato" style="color: red">
+    In prestito
+  </p>
+  <ng-template #utenteNonTrovato>
+    <p style="color: green">Disponibile</p>
+  </ng-template>
 </div>
+<button (click)="newView('viewHome')">Torna alla home</button>

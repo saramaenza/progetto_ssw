@@ -15,6 +15,11 @@ import { Libro } from '../libro';
 export class RicercaComponent implements OnInit {
   @Output() updateView = new EventEmitter<string>();
   view: string = 'viewRicerca';
+  numero: number = 0;
+  titoloTrovato: string = '';
+  autoreTrovato: string = '';
+  posizioneTrovato: string = '';
+  utenteTrovato: string = '';
 
   constructor(private as: archivio_service) {}
 
@@ -25,22 +30,19 @@ export class RicercaComponent implements OnInit {
     this.updateView.emit(this.view);
   }
 
-  numero: number = 0;
-
   cerca() {
     //acquisizione della stringa digitata
     var input: HTMLInputElement = document.getElementById(
       'stringa'
     ) as HTMLInputElement;
     var stringa = input.value;
-    console.log(stringa);
 
     //download dell'archivio
     this.as.getData().subscribe({
       next: (x: AjaxResponse<any>) => {
         let archivio: Archivio = new Archivio(JSON.parse(x.response).archivio);
-        console.log('RICERCA', archivio.ricerca_libro(stringa));
         let trovati = archivio.ricerca_libro(stringa);
+        console.log('TR', trovati);
         if (stringa.length > 0) {
           this.numero = trovati.length;
         } else {
@@ -48,6 +50,10 @@ export class RicercaComponent implements OnInit {
         }
         if (this.numero == 1) {
           this.view = 'viewRisultato';
+          this.titoloTrovato = trovati[0].titolo;
+          this.autoreTrovato = trovati[0].autore;
+          this.posizioneTrovato = trovati[0].posizione;
+          this.utenteTrovato = trovati[0].utente;
         }
       },
       error: (err) =>
