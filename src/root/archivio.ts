@@ -8,34 +8,14 @@ export class Archivio {
   }
 
   ricerca_libro(stringa: string) {
-    console.log('STRINGA', stringa);
-    let trovati = {};
-
-    console.log(Array.isArray(this.archivio));
-
-    /*
-    let libriTrovati = libri.archivio.filter((stringa) =>
-      (stringa.titolo + stringa.autore).toLowerCase().includes(stringa)
+    let trovati = this.archivio.filter((libro) =>
+      (libro.titolo + ' ' + libro.autore).toLowerCase().includes(stringa)
     );
-
-    console.log(libriTrovati);
-
-    for (let i = 0; i < this.archivio.length; i++) {
-      if (
-        (this.archivio[i].titolo + ' ' + this.archivio[i].autore)
-          .toLowerCase()
-          .includes(stringa)
-      ) {
-        trovati[i] = this.archivio[i].titolo;
-      }
-    }
+    console.log(trovati);
     return trovati;
-    */
   }
 
   inserisci_libro(libro: Libro) {
-    console.log('LIBRO', libro);
-    console.log('ARCH2', this.archivio);
     this.archivio.push(libro);
   }
 }

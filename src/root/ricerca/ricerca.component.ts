@@ -40,7 +40,7 @@ export class RicercaComponent implements OnInit {
     //download dell'archivio
     this.as.getData().subscribe({
       next: (x: AjaxResponse<any>) => {
-        let archivio: Archivio = new Archivio(JSON.parse(x.response));
+        let archivio: Archivio = new Archivio(JSON.parse(x.response).archivio);
 
         console.log('RICERCA', archivio.ricerca_libro(stringa));
       },
