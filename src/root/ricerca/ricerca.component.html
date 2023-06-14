@@ -17,11 +17,7 @@
   <p>
     Autore: <i id="autore">{{ autoreTrovato }}</i>
   </p>
-  <p *ngIf="utenteTrovato; else utenteNonTrovato" style="color: red">
-    In prestito
-  </p>
-  <ng-template #utenteNonTrovato>
-    <p style="color: green">Disponibile</p>
-  </ng-template>
+  <app-prestito [utenteTrovato]="utenteTrovato"> </app-prestito>
 </div>
+<div *ngIf="view == 'viewRicerca'"></div>
 <button (click)="newView('viewHome')">Torna alla home</button>

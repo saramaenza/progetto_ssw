@@ -1,9 +1,9 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Libro } from '../libro';
 import { Archivio } from '../archivio';
 import { archivio_service } from '../archivio.service';
-import { AjaxError, AjaxResponse } from 'rxjs/ajax';
+import { AjaxResponse } from 'rxjs/ajax';
 
 @Component({
   selector: 'app-inserimento',

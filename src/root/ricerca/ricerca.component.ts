@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { archivio_service } from '../archivio.service';
 import { AjaxResponse } from 'rxjs/ajax';
 import { Archivio } from '../archivio';
-import { Libro } from '../libro';
+import { PrestitoComponent } from './prestito/prestito.component';
 
 @Component({
   selector: 'app-ricerca',
   templateUrl: './ricerca.component.html',
   styleUrls: ['./ricerca.component.css'],
-  imports: [CommonModule],
+  imports: [CommonModule, PrestitoComponent],
   standalone: true,
 })
 export class RicercaComponent implements OnInit {
@@ -19,6 +19,7 @@ export class RicercaComponent implements OnInit {
   titoloTrovato: string = '';
   autoreTrovato: string = '';
   posizioneTrovato: string = '';
+  utente: string = '';
   utenteTrovato: string = '';
 
   constructor(private as: archivio_service) {}
@@ -42,7 +43,7 @@ export class RicercaComponent implements OnInit {
       next: (x: AjaxResponse<any>) => {
         let archivio: Archivio = new Archivio(JSON.parse(x.response).archivio);
         let trovati = archivio.ricerca_libro(stringa);
-        console.log('TR', trovati);
+
         if (stringa.length > 0) {
           this.numero = trovati.length;
         } else {

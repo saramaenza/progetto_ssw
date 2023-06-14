@@ -1,0 +1,8 @@
+<div *ngIf="utenteTrovato; else utenteNonTrovato">
+  <p style="color: red">In prestito</p>
+  <button (click)="restituzione()">Restituzione</button>
+  <br /><br />
+</div>
+<ng-template #utenteNonTrovato>
+  <p style="color: green">Disponibile</p>
+</ng-template>
