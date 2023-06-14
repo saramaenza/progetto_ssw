@@ -25,7 +25,7 @@ export class RicercaComponent implements OnInit {
     this.updateView.emit(this.view);
   }
 
-  numero: string = '';
+  numero: number = 0;
 
   cerca() {
     //acquisizione della stringa digitata
@@ -35,14 +35,18 @@ export class RicercaComponent implements OnInit {
     var stringa = input.value;
     console.log(stringa);
 
-    this.numero = stringa;
-
     //download dell'archivio
     this.as.getData().subscribe({
       next: (x: AjaxResponse<any>) => {
         let archivio: Archivio = new Archivio(JSON.parse(x.response).archivio);
-
         console.log('RICERCA', archivio.ricerca_libro(stringa));
+        let trovati = archivio.ricerca_libro(stringa);
+        if (stringa.length > 0) {
+          this.numero = trovati.length;
+        }
+        else {
+          this.numero = 0;
+        }
       },
       error: (err) =>
         console.error('Observer got an error: ' + JSON.stringify(err)),
