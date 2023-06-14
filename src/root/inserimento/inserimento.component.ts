@@ -2,8 +2,8 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Libro } from '../libro';
 import { Archivio } from '../archivio';
-import { archivio_service } from 'src/archivio.service';
-import { AjaxResponse } from 'rxjs/ajax';
+import { archivio_service } from '../archivio.service';
+import { AjaxError, AjaxResponse } from 'rxjs/ajax';
 
 @Component({
   selector: 'app-inserimento',
@@ -41,11 +41,25 @@ export class InserimentoComponent implements OnInit {
     ) as HTMLInputElement;
     var newPosizione = inputPosizione.value;
 
-    let libro = new Libro(newTitolo, newAutore, newPosizione, '');
+    let newLibro = new Libro(newTitolo, newAutore, newPosizione, '');
+
+    console.log(newLibro);
 
     this.as.getData().subscribe({
       next: (x: AjaxResponse<any>) => {
-        console.log('x:', x.response);
+        // JSON:parse -> parsing per avere l'array
+        //'archivio' è l'archivio attuale recuperato dal server
+        let archivio: Archivio = new Archivio(JSON.parse(x.response));
+        //aggiungo il nuovo libro in archivio (in locale)
+        archivio.inserisci_libro(newLibro);
+        //aggiorno il nuovo archivio sul server
+        this.as.setData(JSON.stringify(archivio)).subscribe({
+          next: () => {
+            console.log('Archivio aggiornato!');
+          },
+          error: (err) =>
+            console.error('Observer got an error: ' + JSON.stringify(err)),
+        });
       },
       error: (err) =>
         console.error('Observer got an error: ' + JSON.stringify(err)),
