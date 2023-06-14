@@ -20,4 +20,13 @@ export class RicercaComponent implements OnInit {
     this.view = name;
     this.updateView.emit(this.view);
   }
+
+  cerca() {
+    //recupero valore input
+    var input: HTMLInputElement = document.getElementById(
+      'stringa'
+    ) as HTMLInputElement;
+    var stringa = input.value;
+    console.log(stringa);
+  }
 }

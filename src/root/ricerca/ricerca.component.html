@@ -3,7 +3,7 @@
   <b>Ricerca per titolo e autore:</b>
   <br /><br />
 
-  <input id="cerca" />
-  <p>... corrispondenze</p>
+  <input id="stringa" type="text" (keyup.enter)="cerca()" />
+  <p id="numOccorrenze">... corrispondenze</p>
   <button (click)="newView('viewHome')">Torna alla home</button>
 </div>
