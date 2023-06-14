@@ -1,13 +1,13 @@
 import { Libro } from './libro';
 
 export class Archivio {
-  archivio = [];
+  archivio: Array<Libro> = [];
   constructor(archivio) {
     this.archivio = archivio;
   }
   ricerca_libro() {}
 
-  inserisci_libro(Libro) {
-    this.archivio.push(Libro);
+  inserisci_libro(libro: Libro) {
+    this.archivio.push(libro);
   }
 }

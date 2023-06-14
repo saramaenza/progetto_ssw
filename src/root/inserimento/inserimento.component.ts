@@ -1,5 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Libro } from '../libro';
+import { Archivio } from '../archivio';
+import { archivio_service } from 'src/archivio.service';
+import { AjaxResponse } from 'rxjs/ajax';
 
 @Component({
   selector: 'app-inserimento',
@@ -12,7 +16,7 @@ export class InserimentoComponent implements OnInit {
   @Output() updateView = new EventEmitter<string>();
   view: string = 'viewInserimento';
 
-  constructor() {}
+  constructor(private as: archivio_service) {}
 
   ngOnInit() {}
 
@@ -37,6 +41,14 @@ export class InserimentoComponent implements OnInit {
     ) as HTMLInputElement;
     var newPosizione = inputPosizione.value;
 
-    console.log(newAutore, newTitolo, newPosizione);
+    let libro = new Libro(newTitolo, newAutore, newPosizione, '');
+
+    this.as.getData().subscribe({
+      next: (x: AjaxResponse<any>) => {
+        console.log('x:', x.response);
+      },
+      error: (err) =>
+        console.error('Observer got an error: ' + JSON.stringify(err)),
+    });
   }
 }
