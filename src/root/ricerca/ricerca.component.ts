@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { archivio_service } from '../archivio.service';
 import { AjaxResponse } from 'rxjs/ajax';
 import { Archivio } from '../archivio';
+import { Libro } from '../libro';
 
 @Component({
   selector: 'app-ricerca',
@@ -24,6 +25,8 @@ export class RicercaComponent implements OnInit {
     this.updateView.emit(this.view);
   }
 
+  numero: string = '';
+
   cerca() {
     //acquisizione della stringa digitata
     var input: HTMLInputElement = document.getElementById(
@@ -32,11 +35,14 @@ export class RicercaComponent implements OnInit {
     var stringa = input.value;
     console.log(stringa);
 
+    this.numero = stringa;
+
     //download dell'archivio
     this.as.getData().subscribe({
       next: (x: AjaxResponse<any>) => {
         let archivio: Archivio = new Archivio(JSON.parse(x.response));
-        console.log(archivio);
+
+        console.log('RICERCA', archivio.ricerca_libro(stringa));
       },
       error: (err) =>
         console.error('Observer got an error: ' + JSON.stringify(err)),
