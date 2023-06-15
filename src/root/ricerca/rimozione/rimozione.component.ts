@@ -26,7 +26,7 @@ export class RimozioneComponent implements OnInit {
       next: (x: AjaxResponse<any>) => {
         //recupero dal server dell'archivio
         let archivio: Archivio = new Archivio(JSON.parse(x.response).archivio);
-        archivio.rimuovi_libro(this.libroTrovato[0]);
+        //archivio.rimuovi_libro(this.libroTrovato[0]);
         //aggiorno il nuovo archivio sul server
         console.log(archivio);
         this.as.setData(JSON.stringify(archivio)).subscribe({
