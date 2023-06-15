@@ -4,6 +4,7 @@ import { archivio_service } from '../archivio.service';
 import { AjaxResponse } from 'rxjs/ajax';
 import { Archivio } from '../archivio';
 import { PrestitoComponent } from './prestito/prestito.component';
+import { Libro } from '../libro';
 
 @Component({
   selector: 'app-ricerca',
@@ -22,6 +23,7 @@ export class RicercaComponent implements OnInit {
   posizioneTrovato: string = '';
   utente: string = '';
   utenteTrovato: string = '';
+  libroTrovato: Array<Libro> = [];
 
   constructor(private as: archivio_service) {}
 
@@ -52,6 +54,7 @@ export class RicercaComponent implements OnInit {
         }
         if (this.numero == 1) {
           this.view = 'viewRisultato';
+          this.libroTrovato.push(trovati[0]);
           this.titoloTrovato = trovati[0].titolo;
           this.autoreTrovato = trovati[0].autore;
           this.posizioneTrovato = trovati[0].posizione;
