@@ -42,15 +42,11 @@ export class RicercaComponent implements OnInit {
     ) as HTMLInputElement;
     var stringa = input.value;
 
-    console.log(stringa);
-
     //download dell'archivio
     this.as.getData().subscribe({
       next: (x: AjaxResponse<any>) => {
         let archivio: Archivio = new Archivio(JSON.parse(x.response).archivio);
         let trovati = archivio.ricerca_libro(stringa);
-
-        console.log(trovati);
 
         if (stringa.length > 0) {
           this.numero = trovati.length;
