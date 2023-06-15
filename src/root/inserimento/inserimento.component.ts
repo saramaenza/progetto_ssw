@@ -48,16 +48,21 @@ export class InserimentoComponent implements OnInit {
       next: (x: AjaxResponse<any>) => {
         //recupero dal server dell'archivio
         let archivio: Archivio = new Archivio(JSON.parse(x.response).archivio);
-        //aggiungo il nuovo libro in archivio
-        archivio.inserisci_libro(newLibro);
-        //aggiorno il nuovo archivio sul server
-        this.as.setData(JSON.stringify(archivio)).subscribe({
-          next: () => {
-            console.log('Archivio aggiornato!');
-          },
-          error: (err) =>
-            console.error('Observer got an error: ' + JSON.stringify(err)),
-        });
+        //controllo che la posizione sia libera
+        if (!JSON.stringify(archivio).includes(newPosizione)) {
+          //aggiungo il nuovo libro in archivio
+          archivio.inserisci_libro(newLibro);
+          //aggiorno il nuovo archivio sul server
+          this.as.setData(JSON.stringify(archivio)).subscribe({
+            next: () => {
+              console.log('Archivio aggiornato!');
+            },
+            error: (err) =>
+              console.error('Observer got an error: ' + JSON.stringify(err)),
+          });
+        } else {
+          console.log('Posizione già occupata');
+        }
       },
       error: (err) =>
         console.error('Observer got an error: ' + JSON.stringify(err)),
