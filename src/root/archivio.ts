@@ -19,10 +19,6 @@ export class Archivio {
   }
 
   rimuovi_libro(libro: Libro) {
-    let nuovoArray = this.archivio.filter(
-      (item) => item.posizione !== libro.posizione
-    );
-    console.log('NUOVO ARRAY', nuovoArray);
-    return nuovoArray;
+    return this.archivio.filter((item) => item.posizione != libro.posizione);
   }
 }
