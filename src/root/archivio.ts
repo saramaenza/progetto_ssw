@@ -17,4 +17,8 @@ export class Archivio {
   inserisci_libro(libro: Libro) {
     this.archivio.push(libro);
   }
+
+  rimuovi_libro(libro: Libro) {
+    this.archivio.map((element) => element);
+  }
 }

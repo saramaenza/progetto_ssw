@@ -5,12 +5,13 @@ import { AjaxResponse } from 'rxjs/ajax';
 import { Archivio } from '../archivio';
 import { PrestitoComponent } from './prestito/prestito.component';
 import { Libro } from '../libro';
+import { RimozioneComponent } from './rimozione/rimozione.component';
 
 @Component({
   selector: 'app-ricerca',
   templateUrl: './ricerca.component.html',
   styleUrls: ['./ricerca.component.css'],
-  imports: [CommonModule, PrestitoComponent],
+  imports: [CommonModule, PrestitoComponent, RimozioneComponent],
   standalone: true,
 })
 export class RicercaComponent implements OnInit {
