@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AjaxResponse } from 'rxjs/ajax';
 import { Libro } from '../../libro';
 import { Archivio } from '../../archivio';
@@ -15,6 +15,8 @@ import { archivio_service } from '../../archivio.service';
 export class PrestitoComponent implements OnInit {
   @Input() utenteTrovato: string;
   @Input() libroTrovato: Array<Libro>;
+  @Output() updateView = new EventEmitter<string>();
+  view: string = 'viewRisultati';
 
   constructor(private as: archivio_service) {}
 
@@ -44,17 +46,14 @@ export class PrestitoComponent implements OnInit {
       error: (err) =>
         console.error('Observer got an error: ' + JSON.stringify(err)),
     });
+    this.updateView.emit('viewHome');
   }
 
   prestito() {
-    console.log('prestito');
     var input: HTMLInputElement = document.getElementById(
       'prestito'
     ) as HTMLInputElement;
     var nomePrestito = input.value;
-    console.log(nomePrestito);
-    console.log(this.libroTrovato);
-
     //download dell'archivio
     this.as.getData().subscribe({
       next: (x: AjaxResponse<any>) => {
@@ -81,5 +80,6 @@ export class PrestitoComponent implements OnInit {
       error: (err) =>
         console.error('Observer got an error: ' + JSON.stringify(err)),
     });
+    this.updateView.emit('viewHome');
   }
 }

@@ -20,6 +20,7 @@
   <app-prestito
     [utenteTrovato]="utenteTrovato"
     [libroTrovato]="libroTrovato"
+    (updateView)="newView($event)"
   ></app-prestito>
 </div>
 <div *ngIf="view == 'viewRicerca'"></div>
