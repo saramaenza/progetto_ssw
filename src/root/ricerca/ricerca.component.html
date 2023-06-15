@@ -22,7 +22,8 @@
     [libroTrovato]="libroTrovato"
     (updateView)="newView($event)"
   ></app-prestito>
-  <app-rimozione [libroTrovato]="libroTrovato"> </app-rimozione>
+  <app-rimozione [libroTrovato]="libroTrovato" (updateView)="newView($event)">
+  </app-rimozione>
 </div>
 <div *ngIf="view == 'viewRicerca'"></div>
 <button (click)="newView('viewHome')">Torna alla home</button>
