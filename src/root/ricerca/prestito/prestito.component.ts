@@ -20,15 +20,28 @@ export class PrestitoComponent implements OnInit {
 
   restituzione() {
     console.log('restituisci');
-    /*
+
     //download dell'archivio
     this.as.getData().subscribe({
       next: (x: AjaxResponse<any>) => {
         let archivio: Archivio = new Archivio(JSON.parse(x.response).archivio);
-        console.log(archivio);
+        let nome = archivio.archivio.filter((x) => {
+          if (x.utente === this.utenteTrovato) {
+            x.utente = '';
+            return x;
+          }
+        });
+        //aggiorno il nuovo archivio sul server
+        this.as.setData(JSON.stringify(archivio)).subscribe({
+          next: () => {
+            console.log('Archivio aggiornato!');
+          },
+          error: (err) =>
+            console.error('Observer got an error: ' + JSON.stringify(err)),
+        });
       },
       error: (err) =>
         console.error('Observer got an error: ' + JSON.stringify(err)),
-    });*/
+    });
   }
 }
