@@ -11,7 +11,6 @@ export class Archivio {
     let trovati = this.archivio.filter((libro) =>
       (libro.titolo + ' ' + libro.autore).toLowerCase().includes(stringa)
     );
-
     return trovati;
   }
 
