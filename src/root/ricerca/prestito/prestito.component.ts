@@ -26,17 +26,11 @@ export class PrestitoComponent implements OnInit {
     //download dell'archivio
     this.as.getData().subscribe({
       next: (x: AjaxResponse<any>) => {
-        let archivio: Archivio = new Archivio(JSON.parse(x.response).archivio);
+        let archivio: Archivio = new Archivio(JSON.parse(x.response));
 
         archivio.restituzione_libro(this.libroTrovato[0]);
         //aggiorno il nuovo archivio sul server
-        this.as.setData(JSON.stringify(archivio)).subscribe({
-          next: () => {
-            console.log('Archivio aggiornato!');
-          },
-          error: (err) =>
-            console.error('Observer got an error: ' + JSON.stringify(err)),
-        });
+        archivio.aggiorna_archivio(this.as);
       },
       error: (err) =>
         console.error('Observer got an error: ' + JSON.stringify(err)),
@@ -52,17 +46,10 @@ export class PrestitoComponent implements OnInit {
     //download dell'archivio
     this.as.getData().subscribe({
       next: (x: AjaxResponse<any>) => {
-        let archivio: Archivio = new Archivio(JSON.parse(x.response).archivio);
-
+        let archivio: Archivio = new Archivio(JSON.parse(x.response));
         archivio.prestito_libro(this.libroTrovato[0], nomePrestito);
         //aggiorno il nuovo archivio sul server
-        this.as.setData(JSON.stringify(archivio)).subscribe({
-          next: () => {
-            console.log('Archivio aggiornato!');
-          },
-          error: (err) =>
-            console.error('Observer got an error: ' + JSON.stringify(err)),
-        });
+        archivio.aggiorna_archivio(this.as);
       },
       error: (err) =>
         console.error('Observer got an error: ' + JSON.stringify(err)),

@@ -38,4 +38,12 @@ export class Archivio {
       }
     });
   }
+
+  aggiorna_archivio(as) {
+    as.setData(JSON.stringify(this.archivio)).subscribe({
+      next: () => console.log('Archivio aggiornato!'),
+      error: (err) =>
+        console.log('Observer got an error: ' + JSON.stringify(err)),
+    });
+  }
 }

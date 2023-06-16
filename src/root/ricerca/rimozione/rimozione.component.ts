@@ -27,16 +27,10 @@ export class RimozioneComponent implements OnInit {
         //recupero dal server dell'archivio
         let archivio: Archivio = new Archivio(JSON.parse(x.response));
         let nuovoArchivio: Archivio = new Archivio(
-          archivio.rimozione(this.libroTrovato[0])
+          archivio.rimozione_libro(this.libroTrovato[0])
         );
         //aggiorno il nuovo archivio sul server
-        this.as.setData(JSON.stringify(nuovoArchivio)).subscribe({
-          next: () => {
-            console.log('Archivio aggiornato!');
-          },
-          error: (err) =>
-            console.error('Observer got an error: ' + JSON.stringify(err)),
-        });
+        nuovoArchivio.aggiorna_archivio(this.as);
       },
       error: (err) =>
         console.error('Observer got an error: ' + JSON.stringify(err)),

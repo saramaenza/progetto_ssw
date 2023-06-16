@@ -27,17 +27,17 @@ export class InserimentoComponent implements OnInit {
 
   newBook() {
     //recupero dei valori dal form
-    var inputAutore: HTMLInputElement = document.getElementById(
+    var inputAutore = document.getElementById(
       'nuovoAutore'
     ) as HTMLInputElement;
     var newAutore = inputAutore.value;
 
-    var inputTitolo: HTMLInputElement = document.getElementById(
+    var inputTitolo = document.getElementById(
       'nuovoTitolo'
     ) as HTMLInputElement;
-    var newTitolo = inputTitolo.value;
+    const newTitolo = inputTitolo.value;
 
-    var inputPosizione: HTMLInputElement = document.getElementById(
+    var inputPosizione = document.getElementById(
       'nuovaPosizione'
     ) as HTMLInputElement;
     var newPosizione = inputPosizione.value;
@@ -47,20 +47,13 @@ export class InserimentoComponent implements OnInit {
     this.as.getData().subscribe({
       next: (x: AjaxResponse<any>) => {
         //recupero dal server dell'archivio
-        let archivio: Archivio = new Archivio(JSON.parse(x.response).archivio);
-
+        let archivio: Archivio = new Archivio(JSON.parse(x.response));
         //controllo che la posizione sia libera
         if (!JSON.stringify(archivio).includes(newPosizione)) {
           //aggiungo il nuovo libro in archivio
           archivio.inserimento_libro(newLibro);
           //aggiorno il nuovo archivio sul server
-          this.as.setData(JSON.stringify(archivio)).subscribe({
-            next: () => {
-              console.log('Archivio aggiornato!');
-            },
-            error: (err) =>
-              console.error('Observer got an error: ' + JSON.stringify(err)),
-          });
+          archivio.aggiorna_archivio(this.as);
         } else {
           console.log('Posizione già occupata');
         }
