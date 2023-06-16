@@ -16,7 +16,7 @@ export class Archivio {
     );
   }
 
-  inserimento_libro(libro: Libro, as: archivio_service) {
+  inserisci_libro(libro: Libro, as: archivio_service) {
     this.archivio.push(libro);
     this.aggiorna_archivio(as);
   }
@@ -28,7 +28,7 @@ export class Archivio {
     this.aggiorna_archivio(as);
   }
 
-  restituzione_libro(libro: Libro, as: archivio_service) {
+  restituisci_libro(libro: Libro, as: archivio_service) {
     this.archivio.filter((x) => {
       if (x.posizione === libro.posizione) {
         x.utente = '';

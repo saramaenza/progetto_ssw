@@ -37,7 +37,7 @@ export class InserimentoComponent implements OnInit {
     ).value;
     let newLibro = new Libro(nuovoTitolo, nuovoAutore, nuovaPosizione, '');
     if (!JSON.stringify(this.archivio).includes(nuovaPosizione)) {
-      this.archivio.inserimento_libro(newLibro, this.as);
+      this.archivio.inserisci_libro(newLibro, this.as);
     } else {
       console.log('Posizione già occupata');
     }

@@ -24,7 +24,7 @@ export class PrestitoComponent implements OnInit {
   }
 
   restituzione() {
-    this.archivio.restituzione_libro(this.libroTrovato[0], this.as);
+    this.archivio.restituisci_libro(this.libroTrovato[0], this.as);
     this.aggiornaView.emit('viewHome');
   }
 
