@@ -9,16 +9,15 @@
 <div *ngIf="view == 'viewRisultato'">
   <b>Documento trovato:</b>
   <p>
-    Posizione: <i id="posizione">{{ posizioneTrovato }}</i>
+    Posizione: <i id="posizione">{{ libroTrovato[0].posizione }}</i>
   </p>
   <p>
-    Titolo: <i id="titolo">{{ titoloTrovato }}</i>
+    Titolo: <i id="titolo">{{ libroTrovato[0].titolo }}</i>
   </p>
   <p>
-    Autore: <i id="autore">{{ autoreTrovato }}</i>
+    Autore: <i id="autore">{{ libroTrovato[0].autore }}</i>
   </p>
   <app-prestito
-    [utenteTrovato]="utenteTrovato"
     [libroTrovato]="libroTrovato"
     (updateView)="newView($event)"
   ></app-prestito>

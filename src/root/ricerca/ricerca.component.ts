@@ -16,14 +16,8 @@ import { RimozioneComponent } from './rimozione/rimozione.component';
 })
 export class RicercaComponent implements OnInit {
   @Output() updateView = new EventEmitter<string>();
-
   view: string = 'viewRicerca';
   numero: number = 0;
-  titoloTrovato: string = '';
-  autoreTrovato: string = '';
-  posizioneTrovato: string = '';
-  utente: string = '';
-  utenteTrovato: string = '';
   libroTrovato: Array<Libro> = [];
 
   constructor(private as: archivio_service) {}
@@ -57,10 +51,6 @@ export class RicercaComponent implements OnInit {
         if (this.numero == 1) {
           this.view = 'viewRisultato';
           this.libroTrovato.push(trovati[0]);
-          this.titoloTrovato = trovati[0].titolo;
-          this.autoreTrovato = trovati[0].autore;
-          this.posizioneTrovato = trovati[0].posizione;
-          this.utenteTrovato = trovati[0].utente;
         }
       },
       error: (err) =>

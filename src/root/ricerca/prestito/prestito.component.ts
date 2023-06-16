@@ -13,7 +13,6 @@ import { archivio_service } from '../../archivio.service';
   standalone: true,
 })
 export class PrestitoComponent implements OnInit {
-  @Input() utenteTrovato: string;
   @Input() libroTrovato: Array<Libro>;
   @Output() updateView = new EventEmitter<string>();
   view: string = 'viewRisultati';

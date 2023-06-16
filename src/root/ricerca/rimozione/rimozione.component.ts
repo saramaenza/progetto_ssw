@@ -14,7 +14,6 @@ import { Libro } from '../../libro';
 })
 export class RimozioneComponent implements OnInit {
   constructor(private as: archivio_service) {}
-  @Input() utenteTrovato: string;
   @Input() libroTrovato: Array<Libro>;
   @Output() updateView = new EventEmitter<string>();
   view: string = '';
