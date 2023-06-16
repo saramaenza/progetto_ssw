@@ -30,7 +30,6 @@ export class RicercaComponent implements OnInit {
   }
 
   cerca() {
-    console.log(this.archivio);
     let stringaInput = (document.getElementById('stringa') as HTMLInputElement)
       .value;
     let trovati = this.archivio.ricerca_libro(stringaInput);

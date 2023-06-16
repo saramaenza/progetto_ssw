@@ -31,6 +31,5 @@ export class RootComponent implements OnInit {
       error: (err) =>
         console.error('Observer got an error: ' + JSON.stringify(err)),
     });
-    console.log(this.archivio);
   }
 }
