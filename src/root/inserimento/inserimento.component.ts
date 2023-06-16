@@ -48,6 +48,7 @@ export class InserimentoComponent implements OnInit {
       next: (x: AjaxResponse<any>) => {
         //recupero dal server dell'archivio
         let archivio: Archivio = new Archivio(JSON.parse(x.response).archivio);
+
         //controllo che la posizione sia libera
         if (!JSON.stringify(archivio).includes(newPosizione)) {
           //aggiungo il nuovo libro in archivio

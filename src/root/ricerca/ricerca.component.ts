@@ -46,6 +46,7 @@ export class RicercaComponent implements OnInit {
     this.as.getData().subscribe({
       next: (x: AjaxResponse<any>) => {
         let archivio: Archivio = new Archivio(JSON.parse(x.response).archivio);
+
         let trovati = archivio.ricerca_libro(stringa);
 
         if (stringa.length > 0) {

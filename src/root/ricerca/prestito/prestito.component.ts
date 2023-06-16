@@ -27,6 +27,7 @@ export class PrestitoComponent implements OnInit {
     this.as.getData().subscribe({
       next: (x: AjaxResponse<any>) => {
         let archivio: Archivio = new Archivio(JSON.parse(x.response).archivio);
+
         archivio.restituzione_libro(this.libroTrovato[0]);
         //aggiorno il nuovo archivio sul server
         this.as.setData(JSON.stringify(archivio)).subscribe({
@@ -52,6 +53,7 @@ export class PrestitoComponent implements OnInit {
     this.as.getData().subscribe({
       next: (x: AjaxResponse<any>) => {
         let archivio: Archivio = new Archivio(JSON.parse(x.response).archivio);
+
         archivio.prestito_libro(this.libroTrovato[0], nomePrestito);
         //aggiorno il nuovo archivio sul server
         this.as.setData(JSON.stringify(archivio)).subscribe({
