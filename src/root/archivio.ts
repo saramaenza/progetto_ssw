@@ -4,7 +4,7 @@ import { Libro } from './libro';
 export class Archivio {
   archivio: Array<Libro> = [];
 
-  constructor(archivio) {
+  constructor(archivio: Libro[]) {
     this.archivio = archivio;
   }
 
