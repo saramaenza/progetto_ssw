@@ -18,7 +18,9 @@ export class InserimentoComponent implements OnInit {
 
   constructor(private as: archivio_service) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.archivio);
+  }
 
   cambioView(view: string) {
     this.view = view;
@@ -37,8 +39,7 @@ export class InserimentoComponent implements OnInit {
     ).value;
     let newLibro = new Libro(nuovoTitolo, nuovoAutore, nuovaPosizione, '');
     if (!JSON.stringify(this.archivio).includes(nuovaPosizione)) {
-      this.archivio.inserimento_libro(newLibro);
-      this.archivio.aggiorna_archivio(this.as);
+      this.archivio.inserimento_libro(newLibro, this.as);
     } else {
       console.log('Posizione già occupata');
     }

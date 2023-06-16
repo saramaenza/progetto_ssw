@@ -19,7 +19,8 @@ export class PrestitoComponent implements OnInit {
 
   constructor(private as: archivio_service) {}
 
-  ngOnInit() {}
+  ngOnInit() {    console.log(this.archivio);
+  }
 
   restituzione() {
     this.archivio.restituzione_libro(this.libroTrovato[0]);

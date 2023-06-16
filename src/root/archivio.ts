@@ -1,3 +1,4 @@
+import { archivio_service } from './archivio.service';
 import { Libro } from './libro';
 
 export class Archivio {
@@ -15,12 +16,16 @@ export class Archivio {
     );
   }
 
-  inserimento_libro(libro: Libro) {
+  inserimento_libro(libro: Libro, as: archivio_service) {
     this.archivio.push(libro);
+    this.aggiorna_archivio(as);
   }
 
-  rimozione_libro(libro: Libro) {
-    return this.archivio.filter((item) => item.posizione != libro.posizione);
+  rimuovi_libro(posizione: string, as: archivio_service) {
+    this.archivio = this.archivio.filter(
+      (libro) => libro.posizione !== posizione
+    );
+    this.aggiorna_archivio(as);
   }
 
   restituzione_libro(libro: Libro) {

@@ -22,7 +22,8 @@ export class RicercaComponent implements OnInit {
 
   constructor(private as: archivio_service) {}
 
-  ngOnInit() {}
+  ngOnInit() {    console.log(this.archivio);
+  }
 
   cambioView(view: string) {
     this.view = view;
@@ -30,6 +31,7 @@ export class RicercaComponent implements OnInit {
   }
 
   cerca() {
+    console.log(this.archivio);
     let stringaInput = (document.getElementById('stringa') as HTMLInputElement)
       .value;
     let trovati = this.archivio.ricerca_libro(stringaInput);

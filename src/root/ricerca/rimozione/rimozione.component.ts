@@ -21,10 +21,6 @@ export class RimozioneComponent implements OnInit {
   ngOnInit() {}
 
   rimozione() {
-    let nuovoArchivio: Archivio = new Archivio(
-      this.archivio.rimozione_libro(this.libroTrovato[0])
-    );
-    nuovoArchivio.aggiorna_archivio(this.as);
-    this.aggiornaView.emit('viewHome');
+    this.archivio.rimuovi_libro(this.libroTrovato[0].posizione, this.as);
   }
 }
