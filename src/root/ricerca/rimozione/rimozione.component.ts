@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AjaxResponse } from 'rxjs/ajax';
 import { Archivio } from '../../archivio';
 import { archivio_service } from '../../archivio.service';
 import { Libro } from '../../libro';
@@ -16,7 +15,7 @@ export class RimozioneComponent implements OnInit {
   constructor(private as: archivio_service) {}
   @Input() libroTrovato: Array<Libro>;
   @Input() archivio: Archivio;
-  @Output() updateView = new EventEmitter<string>();
+  @Output() aggiornaView = new EventEmitter<string>();
   view: string = '';
 
   ngOnInit() {}
@@ -25,8 +24,7 @@ export class RimozioneComponent implements OnInit {
     let nuovoArchivio: Archivio = new Archivio(
       this.archivio.rimozione_libro(this.libroTrovato[0])
     );
-    //aggiorno il nuovo archivio sul server
     nuovoArchivio.aggiorna_archivio(this.as);
-    this.updateView.emit('viewHome');
+    this.aggiornaView.emit('viewHome');
   }
 }

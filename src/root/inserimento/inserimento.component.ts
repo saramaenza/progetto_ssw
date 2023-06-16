@@ -12,7 +12,7 @@ import { archivio_service } from '../archivio.service';
   standalone: true,
 })
 export class InserimentoComponent implements OnInit {
-  @Output() updateView = new EventEmitter<string>();
+  @Output() aggiornaView = new EventEmitter<string>();
   @Input() archivio: Archivio;
   view: string = 'viewInserimento';
 
@@ -20,34 +20,24 @@ export class InserimentoComponent implements OnInit {
 
   ngOnInit() {}
 
-  newView(name: string) {
+  cambioView(name: string) {
     this.view = name;
-    this.updateView.emit(this.view);
+    this.aggiornaView.emit(this.view);
   }
 
-  newBook() {
-    //recupero dei valori dal form
-    var inputAutore = document.getElementById(
-      'nuovoAutore'
-    ) as HTMLInputElement;
-    var newAutore = inputAutore.value;
-
-    var inputTitolo = document.getElementById(
-      'nuovoTitolo'
-    ) as HTMLInputElement;
-    const newTitolo = inputTitolo.value;
-
-    var inputPosizione = document.getElementById(
-      'nuovaPosizione'
-    ) as HTMLInputElement;
-    var newPosizione = inputPosizione.value;
-
-    let newLibro = new Libro(newTitolo, newAutore, newPosizione, '');
-
-    if (!JSON.stringify(this.archivio).includes(newPosizione)) {
-      //aggiungo il nuovo libro in archivio
+  nuovoLibro() {
+    let nuovoAutore = (
+      document.getElementById('nuovoAutore') as HTMLInputElement
+    ).value;
+    let nuovoTitolo = (
+      document.getElementById('nuovoTitolo') as HTMLInputElement
+    ).value;
+    let nuovaPosizione = (
+      document.getElementById('nuovaPosizione') as HTMLInputElement
+    ).value;
+    let newLibro = new Libro(nuovoTitolo, nuovoAutore, nuovaPosizione, '');
+    if (!JSON.stringify(this.archivio).includes(nuovaPosizione)) {
       this.archivio.inserimento_libro(newLibro);
-      //aggiorno il nuovo archivio sul server
       this.archivio.aggiorna_archivio(this.as);
     } else {
       console.log('Posizione già occupata');

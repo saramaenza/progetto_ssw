@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AjaxResponse } from 'rxjs/ajax';
 import { Libro } from '../../libro';
 import { Archivio } from '../../archivio';
 import { archivio_service } from '../../archivio.service';
@@ -15,7 +14,7 @@ import { archivio_service } from '../../archivio.service';
 export class PrestitoComponent implements OnInit {
   @Input() libroTrovato: Array<Libro>;
   @Input() archivio: Archivio;
-  @Output() updateView = new EventEmitter<string>();
+  @Output() aggiornaView = new EventEmitter<string>();
   view: string = 'viewRisultati';
 
   constructor(private as: archivio_service) {}
@@ -24,19 +23,15 @@ export class PrestitoComponent implements OnInit {
 
   restituzione() {
     this.archivio.restituzione_libro(this.libroTrovato[0]);
-    //aggiorno il nuovo archivio sul server
     this.archivio.aggiorna_archivio(this.as);
-    this.updateView.emit('viewHome');
+    this.aggiornaView.emit('viewHome');
   }
 
   prestito() {
-    var input: HTMLInputElement = document.getElementById(
-      'prestito'
-    ) as HTMLInputElement;
-    var nomePrestito = input.value;
-    this.archivio.prestito_libro(this.libroTrovato[0], nomePrestito);
-    //aggiorno il nuovo archivio sul server
+    let stringaInput = (document.getElementById('prestito') as HTMLInputElement)
+      .value;
+    this.archivio.prestito_libro(this.libroTrovato[0], stringaInput);
     this.archivio.aggiorna_archivio(this.as);
-    this.updateView.emit('viewHome');
+    this.aggiornaView.emit('viewHome');
   }
 }

@@ -4,7 +4,7 @@
   <br /><br />
 
   <input (keyup)="cerca()" id="stringa" />
-  <p id="numOccorrenze">{{ numero }} corrispondenze</p>
+  <p id="numOccorrenze">{{ numeroTrovati }} corrispondenze</p>
 </div>
 <div *ngIf="view == 'viewRisultato'">
   <b>Documento trovato:</b>
@@ -19,15 +19,15 @@
   </p>
   <app-prestito
     [libroTrovato]="libroTrovato"
-    (updateView)="newView($event)"
+    (aggiornaView)="cambioView($event)"
     [archivio]="archivio"
   ></app-prestito>
   <app-rimozione
     [archivio]="archivio"
     [libroTrovato]="libroTrovato"
-    (updateView)="newView($event)"
+    (aggiornaView)="cambioView($event)"
   >
   </app-rimozione>
 </div>
 <div *ngIf="view == 'viewRicerca'"></div>
-<button (click)="newView('viewHome')">Torna alla home</button>
+<button (click)="cambioView('viewHome')">Torna alla home</button>
