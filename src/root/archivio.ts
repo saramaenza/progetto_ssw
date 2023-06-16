@@ -8,17 +8,18 @@ export class Archivio {
   }
 
   ricerca_libro(stringa: string) {
-    let trovati = this.archivio.filter((libro) =>
-      (libro.titolo + ' ' + libro.autore).toLowerCase().includes(stringa)
+    return this.archivio.filter((libro) =>
+      (libro.titolo + ' ' + libro.autore)
+        .toLowerCase()
+        .includes(stringa.toLowerCase())
     );
-    return trovati;
   }
 
-  inserisci_libro(libro: Libro) {
+  inserimento_libro(libro: Libro) {
     this.archivio.push(libro);
   }
 
-  rimuovi_libro(libro: Libro) {
+  rimozione_libro(libro: Libro) {
     return this.archivio.filter((item) => item.posizione != libro.posizione);
   }
 

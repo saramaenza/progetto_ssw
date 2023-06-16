@@ -52,7 +52,7 @@ export class InserimentoComponent implements OnInit {
         //controllo che la posizione sia libera
         if (!JSON.stringify(archivio).includes(newPosizione)) {
           //aggiungo il nuovo libro in archivio
-          archivio.inserisci_libro(newLibro);
+          archivio.inserimento_libro(newLibro);
           //aggiorno il nuovo archivio sul server
           this.as.setData(JSON.stringify(archivio)).subscribe({
             next: () => {
