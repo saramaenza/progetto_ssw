@@ -19,10 +19,19 @@ export class RicercaComponent implements OnInit {
   view: string = 'viewRicerca';
   numero: number = 0;
   libroTrovato: Array<Libro> = [];
+  archivio: Archivio;
 
   constructor(private as: archivio_service) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.as.getData().subscribe({
+      next: (x: AjaxResponse<any>) => {
+        this.archivio = new Archivio(JSON.parse(x.response));
+      },
+      error: (err) =>
+        console.error('Observer got an error: ' + JSON.stringify(err)),
+    });
+  }
 
   newView(name: string) {
     this.view = name;
@@ -35,27 +44,16 @@ export class RicercaComponent implements OnInit {
       'stringa'
     ) as HTMLInputElement;
     var stringa = input.value;
-
-    //download dell'archivio
-
-    this.as.getData().subscribe({
-      next: (x: AjaxResponse<any>) => {
-        let archivio: Archivio = new Archivio(JSON.parse(x.response));
-
-        let trovati = archivio.ricerca_libro(stringa);
-
-        if (stringa.length > 0) {
-          this.numero = trovati.length;
-        } else {
-          this.numero = 0;
-        }
-        if (this.numero == 1) {
-          this.view = 'viewRisultato';
-          this.libroTrovato.push(trovati[0]);
-        }
-      },
-      error: (err) =>
-        console.error('Observer got an error: ' + JSON.stringify(err)),
-    });
+    console.log(this.archivio);
+    let trovati = this.archivio.ricerca_libro(stringa);
+    if (stringa.length > 0) {
+      this.numero = trovati.length;
+    } else {
+      this.numero = 0;
+    }
+    if (this.numero === 1) {
+      this.view = 'viewRisultato';
+      this.libroTrovato.push(trovati[0]);
+    }
   }
 }
