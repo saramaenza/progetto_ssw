@@ -18,9 +18,7 @@ export class InserimentoComponent implements OnInit {
 
   constructor(private as: archivio_service) {}
 
-  ngOnInit() {
-    console.log(this.archivio);
-  }
+  ngOnInit() {}
 
   cambioView(view: string) {
     this.view = view;

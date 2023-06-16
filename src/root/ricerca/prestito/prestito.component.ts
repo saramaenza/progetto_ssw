@@ -19,20 +19,19 @@ export class PrestitoComponent implements OnInit {
 
   constructor(private as: archivio_service) {}
 
-  ngOnInit() {    console.log(this.archivio);
+  ngOnInit() {
+    console.log(this.archivio);
   }
 
   restituzione() {
-    this.archivio.restituzione_libro(this.libroTrovato[0]);
-    this.archivio.aggiorna_archivio(this.as);
+    this.archivio.restituzione_libro(this.libroTrovato[0], this.as);
     this.aggiornaView.emit('viewHome');
   }
 
   prestito() {
     let stringaInput = (document.getElementById('prestito') as HTMLInputElement)
       .value;
-    this.archivio.prestito_libro(this.libroTrovato[0], stringaInput);
-    this.archivio.aggiorna_archivio(this.as);
+    this.archivio.prestito_libro(this.libroTrovato[0], stringaInput, this.as);
     this.aggiornaView.emit('viewHome');
   }
 }

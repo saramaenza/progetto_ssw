@@ -28,23 +28,25 @@ export class Archivio {
     this.aggiorna_archivio(as);
   }
 
-  restituzione_libro(libro: Libro) {
+  restituzione_libro(libro: Libro, as: archivio_service) {
     this.archivio.filter((x) => {
       if (x.posizione === libro.posizione) {
         x.utente = '';
       }
     });
+    this.aggiorna_archivio(as);
   }
 
-  prestito_libro(libro: Libro, nomePrestito: string) {
+  prestito_libro(libro: Libro, nomePrestito: string, as: archivio_service) {
     this.archivio.map((x) => {
       if (x.posizione === libro.posizione) {
         x.utente = nomePrestito;
       }
     });
+    this.aggiorna_archivio(as);
   }
 
-  aggiorna_archivio(as) {
+  aggiorna_archivio(as: archivio_service) {
     as.setData(JSON.stringify(this.archivio)).subscribe({
       next: () => console.log('Archivio aggiornato!'),
       error: (err) =>
