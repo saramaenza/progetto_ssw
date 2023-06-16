@@ -17,8 +17,8 @@ export class RootComponent implements OnInit {
   view: string = 'viewHome';
   archivio: Archivio;
 
-  cambioView(name: string) {
-    this.view = name;
+  cambioView(view: string) {
+    this.view = view;
   }
 
   constructor(private as: archivio_service) {}

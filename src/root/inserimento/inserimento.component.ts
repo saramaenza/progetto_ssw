@@ -20,8 +20,8 @@ export class InserimentoComponent implements OnInit {
 
   ngOnInit() {}
 
-  cambioView(name: string) {
-    this.view = name;
+  cambioView(view: string) {
+    this.view = view;
     this.aggiornaView.emit(this.view);
   }
 

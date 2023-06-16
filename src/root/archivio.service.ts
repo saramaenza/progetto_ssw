@@ -8,24 +8,24 @@ import { ajax, AjaxResponse } from 'rxjs/ajax';
 export class archivio_service {
   base: string =
     'https://eu-central-1.aws.data.mongodb-api.com/app/kvaas-giwjg/endpoint';
-  key: string = '479ca17b';
+  chiave: string = '479ca17b';
 
   constructor() {}
 
   public getData(): Observable<AjaxResponse<any>> {
     return ajax({
       method: 'GET',
-      url: this.base + '/get?key=' + this.key,
+      url: this.base + '/get?key=' + this.chiave,
       crossDomain: true,
     });
   }
 
-  public setData(newArchivio: string): Observable<AjaxResponse<any>> {
+  public setData(nuovoArchivio: string): Observable<AjaxResponse<any>> {
     return ajax({
       method: 'POST',
-      url: this.base + '/set?key=' + this.key,
+      url: this.base + '/set?key=' + this.chiave,
       crossDomain: true,
-      body: newArchivio,
+      body: nuovoArchivio,
     });
   }
 }
