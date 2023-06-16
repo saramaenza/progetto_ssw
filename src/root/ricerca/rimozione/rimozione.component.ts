@@ -15,25 +15,18 @@ import { Libro } from '../../libro';
 export class RimozioneComponent implements OnInit {
   constructor(private as: archivio_service) {}
   @Input() libroTrovato: Array<Libro>;
+  @Input() archivio: Archivio;
   @Output() updateView = new EventEmitter<string>();
   view: string = '';
 
   ngOnInit() {}
 
   rimozione() {
-    this.as.getData().subscribe({
-      next: (x: AjaxResponse<any>) => {
-        //recupero dal server dell'archivio
-        let archivio: Archivio = new Archivio(JSON.parse(x.response));
-        let nuovoArchivio: Archivio = new Archivio(
-          archivio.rimozione_libro(this.libroTrovato[0])
-        );
-        //aggiorno il nuovo archivio sul server
-        nuovoArchivio.aggiorna_archivio(this.as);
-      },
-      error: (err) =>
-        console.error('Observer got an error: ' + JSON.stringify(err)),
-    });
+    let nuovoArchivio: Archivio = new Archivio(
+      this.archivio.rimozione_libro(this.libroTrovato[0])
+    );
+    //aggiorno il nuovo archivio sul server
+    nuovoArchivio.aggiorna_archivio(this.as);
     this.updateView.emit('viewHome');
   }
 }

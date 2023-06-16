@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Libro } from '../libro';
 import { Archivio } from '../archivio';
 import { archivio_service } from '../archivio.service';
-import { AjaxResponse } from 'rxjs/ajax';
 
 @Component({
   selector: 'app-inserimento',

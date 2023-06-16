@@ -14,6 +14,7 @@ import { archivio_service } from '../../archivio.service';
 })
 export class PrestitoComponent implements OnInit {
   @Input() libroTrovato: Array<Libro>;
+  @Input() archivio: Archivio;
   @Output() updateView = new EventEmitter<string>();
   view: string = 'viewRisultati';
 
@@ -22,18 +23,9 @@ export class PrestitoComponent implements OnInit {
   ngOnInit() {}
 
   restituzione() {
-    //download dell'archivio
-    this.as.getData().subscribe({
-      next: (x: AjaxResponse<any>) => {
-        let archivio: Archivio = new Archivio(JSON.parse(x.response));
-
-        archivio.restituzione_libro(this.libroTrovato[0]);
-        //aggiorno il nuovo archivio sul server
-        archivio.aggiorna_archivio(this.as);
-      },
-      error: (err) =>
-        console.error('Observer got an error: ' + JSON.stringify(err)),
-    });
+    this.archivio.restituzione_libro(this.libroTrovato[0]);
+    //aggiorno il nuovo archivio sul server
+    this.archivio.aggiorna_archivio(this.as);
     this.updateView.emit('viewHome');
   }
 
@@ -42,17 +34,9 @@ export class PrestitoComponent implements OnInit {
       'prestito'
     ) as HTMLInputElement;
     var nomePrestito = input.value;
-    //download dell'archivio
-    this.as.getData().subscribe({
-      next: (x: AjaxResponse<any>) => {
-        let archivio: Archivio = new Archivio(JSON.parse(x.response));
-        archivio.prestito_libro(this.libroTrovato[0], nomePrestito);
-        //aggiorno il nuovo archivio sul server
-        archivio.aggiorna_archivio(this.as);
-      },
-      error: (err) =>
-        console.error('Observer got an error: ' + JSON.stringify(err)),
-    });
+    this.archivio.prestito_libro(this.libroTrovato[0], nomePrestito);
+    //aggiorno il nuovo archivio sul server
+    this.archivio.aggiorna_archivio(this.as);
     this.updateView.emit('viewHome');
   }
 }
