@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Libro } from '../libro';
 import { Archivio } from '../archivio';
@@ -14,6 +14,7 @@ import { AjaxResponse } from 'rxjs/ajax';
 })
 export class InserimentoComponent implements OnInit {
   @Output() updateView = new EventEmitter<string>();
+  @Input() archivio: Archivio;
   view: string = 'viewInserimento';
 
   constructor(private as: archivio_service) {}
@@ -44,22 +45,13 @@ export class InserimentoComponent implements OnInit {
 
     let newLibro = new Libro(newTitolo, newAutore, newPosizione, '');
 
-    this.as.getData().subscribe({
-      next: (x: AjaxResponse<any>) => {
-        //recupero dal server dell'archivio
-        let archivio: Archivio = new Archivio(JSON.parse(x.response));
-        //controllo che la posizione sia libera
-        if (!JSON.stringify(archivio).includes(newPosizione)) {
-          //aggiungo il nuovo libro in archivio
-          archivio.inserimento_libro(newLibro);
-          //aggiorno il nuovo archivio sul server
-          archivio.aggiorna_archivio(this.as);
-        } else {
-          console.log('Posizione già occupata');
-        }
-      },
-      error: (err) =>
-        console.error('Observer got an error: ' + JSON.stringify(err)),
-    });
+    if (!JSON.stringify(this.archivio).includes(newPosizione)) {
+      //aggiungo il nuovo libro in archivio
+      this.archivio.inserimento_libro(newLibro);
+      //aggiorno il nuovo archivio sul server
+      this.archivio.aggiorna_archivio(this.as);
+    } else {
+      console.log('Posizione già occupata');
+    }
   }
 }

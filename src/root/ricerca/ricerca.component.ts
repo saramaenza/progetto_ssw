@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { archivio_service } from '../archivio.service';
 import { AjaxResponse } from 'rxjs/ajax';
@@ -16,22 +16,14 @@ import { RimozioneComponent } from './rimozione/rimozione.component';
 })
 export class RicercaComponent implements OnInit {
   @Output() updateView = new EventEmitter<string>();
+  @Input() archivio: Archivio;
   view: string = 'viewRicerca';
   numero: number = 0;
   libroTrovato: Array<Libro> = [];
-  archivio: Archivio;
 
   constructor(private as: archivio_service) {}
 
-  ngOnInit() {
-    this.as.getData().subscribe({
-      next: (x: AjaxResponse<any>) => {
-        this.archivio = new Archivio(JSON.parse(x.response));
-      },
-      error: (err) =>
-        console.error('Observer got an error: ' + JSON.stringify(err)),
-    });
-  }
+  ngOnInit() {}
 
   newView(name: string) {
     this.view = name;
@@ -44,7 +36,6 @@ export class RicercaComponent implements OnInit {
       'stringa'
     ) as HTMLInputElement;
     var stringa = input.value;
-    console.log(this.archivio);
     let trovati = this.archivio.ricerca_libro(stringa);
     if (stringa.length > 0) {
       this.numero = trovati.length;

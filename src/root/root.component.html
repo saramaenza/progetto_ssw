@@ -5,8 +5,10 @@
   <button (click)="newView('viewRicerca')">Cerca</button>
 </div>
 <div *ngIf="view == 'viewInserimento'">
-  <app-inserimento (updateView)="newView($event)"> </app-inserimento>
+  <app-inserimento (updateView)="newView($event)" [archivio]="archivio">
+  </app-inserimento>
 </div>
 <div *ngIf="view == 'viewRicerca'">
-  <app-ricerca (updateView)="newView($event)"> </app-ricerca>
+  <app-ricerca (updateView)="newView($event)" [archivio]="archivio">
+  </app-ricerca>
 </div>
