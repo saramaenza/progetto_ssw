@@ -22,5 +22,6 @@ export class RimozioneComponent implements OnInit {
 
   rimozione() {
     this.archivio.rimuovi_libro(this.libroTrovato[0].posizione, this.as);
+    this.aggiornaView.emit('viewHome');
   }
 }

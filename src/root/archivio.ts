@@ -38,7 +38,7 @@ export class Archivio {
   }
 
   prestito_libro(libro: Libro, nomePrestito: string, as: archivio_service) {
-    this.archivio.map((x) => {
+    this.archivio.filter((x) => {
       if (x.posizione === libro.posizione) {
         x.utente = nomePrestito;
       }
