@@ -1,9 +1,10 @@
 <!--visualizzazione della home page-->
 <div *ngIf="view == 'viewHome'">
-  <button (click)="cambioView('viewInserimento')">
-    Inserisci un nuovo libro
-  </button>
-  <br /><br />
+  <p>
+    <button (click)="cambioView('viewInserimento')">
+      Inserisci un nuovo libro
+    </button>
+  </p>
   <button (click)="cambioView('viewRicerca')">Cerca</button>
 </div>
 <div *ngIf="view == 'viewInserimento'">
