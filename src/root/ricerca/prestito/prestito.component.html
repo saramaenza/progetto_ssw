@@ -1,0 +1,12 @@
+<!--visualizzazione della sezione prestiti-->
+<div *ngIf="libroTrovato[0].utente; else libroDisponibile">
+  <p style="color: red">In prestito</p>
+  <p>
+    <button (click)="restituzione()">Restituisci</button>
+  </p>
+</div>
+<ng-template #libroDisponibile>
+  <p style="color: green">Disponibile</p>
+  <p><b>Prendi il libro in prestito:</b></p>
+  <p>Nome: <input id="prestito" (keyup.enter)="prestito()" /></p>
+</ng-template>

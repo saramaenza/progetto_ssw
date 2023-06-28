@@ -1,12 +1,17 @@
 <!--visualizzazione della home page-->
 <div *ngIf="view == 'viewHome'">
-  <button (click)="newView('viewInserimento')">Inserisci un nuovo libro</button>
-  <br /><br />
-  <button (click)="newView('viewRicerca')">Cerca</button>
+  <p>
+    <button (click)="cambioView('viewInserimento')">
+      Inserisci un nuovo libro
+    </button>
+  </p>
+  <button (click)="cambioView('viewRicerca')">Cerca</button>
 </div>
 <div *ngIf="view == 'viewInserimento'">
-  <app-inserimento (updateView)="newView($event)"> </app-inserimento>
+  <app-inserimento (aggiornaView)="cambioView($event)" [archivio]="archivio">
+  </app-inserimento>
 </div>
 <div *ngIf="view == 'viewRicerca'">
-  <app-ricerca (updateView)="newView($event)"> </app-ricerca>
+  <app-ricerca (aggiornaView)="cambioView($event)" [archivio]="archivio">
+  </app-ricerca>
 </div>

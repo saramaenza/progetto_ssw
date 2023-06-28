@@ -1,9 +1,33 @@
 <!--visualizzazione della view di ricerca-->
 <div *ngIf="view == 'viewRicerca'">
-  <b>Ricerca per titolo e autore</b>
-  <br /><br />
-
-  <input id="cerca" />
-  <p>... corrispondenze</p>
-  <button (click)="newView('viewHome')">Torna alla home</button>
+  <p>
+    <b>Ricerca per titolo e autore:</b>
+  </p>
+  <input (keyup)="cerca()" id="stringa" />
+  <p id="numOccorrenze">{{ numeroTrovati }} corrispondenze</p>
 </div>
+<div *ngIf="view == 'viewRisultato'">
+  <b>Documento trovato:</b>
+  <p>
+    Posizione: <i>{{ libroTrovato[0].posizione }}</i>
+  </p>
+  <p>
+    Titolo: <i>{{ libroTrovato[0].titolo }}</i>
+  </p>
+  <p>
+    Autore: <i>{{ libroTrovato[0].autore }}</i>
+  </p>
+  <app-prestito
+    [libroTrovato]="libroTrovato"
+    (aggiornaView)="cambioView($event)"
+    [archivio]="archivio"
+  ></app-prestito>
+  <app-rimozione
+    [archivio]="archivio"
+    [libroTrovato]="libroTrovato"
+    (aggiornaView)="cambioView($event)"
+  >
+  </app-rimozione>
+</div>
+<div *ngIf="view == 'viewRicerca'"></div>
+<button (click)="cambioView('viewHome')">Torna alla home</button>
