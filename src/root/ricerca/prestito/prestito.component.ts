@@ -17,19 +17,20 @@ export class PrestitoComponent implements OnInit {
   @Output() aggiornaView = new EventEmitter<string>();
   view: string = 'viewRisultati';
 
-  constructor(private as: archivio_service) {}
+  constructor() {}
 
   ngOnInit() {}
 
   restituzione() {
-    this.archivio.restituisci_libro(this.libroTrovato[0], this.as);
+    this.archivio.restituisci_libro(this.libroTrovato[0]);
+    //aggiorno la view alla home
     this.aggiornaView.emit('viewHome');
   }
 
   prestito() {
     let stringaInput = (document.getElementById('prestito') as HTMLInputElement)
       .value;
-    this.archivio.prestito_libro(this.libroTrovato[0], stringaInput, this.as);
+    this.archivio.prestito_libro(this.libroTrovato[0], stringaInput);
     this.aggiornaView.emit('viewHome');
   }
 }

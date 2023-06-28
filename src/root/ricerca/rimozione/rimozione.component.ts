@@ -12,7 +12,7 @@ import { Libro } from '../../libro';
   standalone: true,
 })
 export class RimozioneComponent implements OnInit {
-  constructor(private as: archivio_service) {}
+  constructor() {}
   @Input() libroTrovato: Array<Libro>;
   @Input() archivio: Archivio;
   @Output() aggiornaView = new EventEmitter<string>();
@@ -21,7 +21,7 @@ export class RimozioneComponent implements OnInit {
   ngOnInit() {}
 
   rimozione() {
-    this.archivio.rimuovi_libro(this.libroTrovato[0].posizione, this.as);
+    this.archivio.rimuovi_libro(this.libroTrovato[0].posizione);
     this.aggiornaView.emit('viewHome');
   }
 }

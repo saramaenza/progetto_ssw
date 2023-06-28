@@ -20,7 +20,7 @@ export class RicercaComponent implements OnInit {
   numeroTrovati: number = 0;
   libroTrovato: Array<Libro> = [];
 
-  constructor(private as: archivio_service) {}
+  constructor() {}
 
   ngOnInit() {}
 
@@ -34,6 +34,7 @@ export class RicercaComponent implements OnInit {
       .value;
     let trovati = this.archivio.ricerca_libro(stringaInput);
     this.numeroTrovati = stringaInput.length > 0 ? trovati.length : 0;
+    //se numero di libri corrispondenti è pari a 1 allora viene visualizzata la scheda del libro
     if (this.numeroTrovati === 1) {
       this.view = 'viewRisultato';
       this.libroTrovato.push(trovati[0]);

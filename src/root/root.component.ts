@@ -26,7 +26,7 @@ export class RootComponent implements OnInit {
   ngOnInit() {
     this.as.getData().subscribe({
       next: (x: AjaxResponse<any>) => {
-        this.archivio = new Archivio(JSON.parse(x.response));
+        this.archivio = new Archivio(JSON.parse(x.response), this.as);
       },
       error: (err) =>
         console.error('Observer got an error: ' + JSON.stringify(err)),

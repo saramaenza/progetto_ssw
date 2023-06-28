@@ -4,7 +4,7 @@ import { Libro } from './libro';
 export class Archivio {
   archivio: Array<Libro> = [];
 
-  constructor(archivio: Libro[]) {
+  constructor(archivio: Libro[], private as: archivio_service) {
     this.archivio = archivio;
   }
 
@@ -16,38 +16,38 @@ export class Archivio {
     );
   }
 
-  inserisci_libro(libro: Libro, as: archivio_service) {
+  inserisci_libro(libro: Libro) {
     this.archivio.push(libro);
-    this.aggiorna_archivio(as);
+    this.aggiorna_archivio();
   }
 
-  rimuovi_libro(posizione: string, as: archivio_service) {
+  rimuovi_libro(posizione: string) {
     this.archivio = this.archivio.filter(
       (libro) => libro.posizione !== posizione
     );
-    this.aggiorna_archivio(as);
+    this.aggiorna_archivio();
   }
 
-  restituisci_libro(libro: Libro, as: archivio_service) {
+  restituisci_libro(libro: Libro) {
     this.archivio.filter((x) => {
       if (x.posizione === libro.posizione) {
         x.utente = '';
       }
     });
-    this.aggiorna_archivio(as);
+    this.aggiorna_archivio();
   }
 
-  prestito_libro(libro: Libro, nomePrestito: string, as: archivio_service) {
+  prestito_libro(libro: Libro, nomePrestito: string) {
     this.archivio.filter((x) => {
       if (x.posizione === libro.posizione) {
         x.utente = nomePrestito;
       }
     });
-    this.aggiorna_archivio(as);
+    this.aggiorna_archivio();
   }
 
-  aggiorna_archivio(as: archivio_service) {
-    as.setData(JSON.stringify(this.archivio)).subscribe({
+  aggiorna_archivio() {
+    this.as.setData(JSON.stringify(this.archivio)).subscribe({
       next: () => console.log('Archivio aggiornato!'),
       error: (err) =>
         console.log('Observer got an error: ' + JSON.stringify(err)),

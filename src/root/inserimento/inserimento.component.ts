@@ -16,16 +16,18 @@ export class InserimentoComponent implements OnInit {
   @Input() archivio: Archivio;
   view: string = 'viewInserimento';
 
-  constructor(private as: archivio_service) {}
+  constructor() {}
 
   ngOnInit() {}
 
+  //funzione per aggiornare la view
   cambioView(view: string) {
     this.view = view;
     this.aggiornaView.emit(this.view);
   }
 
   nuovoLibro() {
+    //recupero dei valori forniti in input
     let nuovoAutore = (
       document.getElementById('nuovoAutore') as HTMLInputElement
     ).value;
@@ -36,10 +38,11 @@ export class InserimentoComponent implements OnInit {
       document.getElementById('nuovaPosizione') as HTMLInputElement
     ).value;
     let newLibro = new Libro(nuovoTitolo, nuovoAutore, nuovaPosizione, '');
+    //verifica che il libro inserito non ricopra una posizione già occupata. Se la posizione è libera allora viene aggiunto il nuovo libro in archivio
     if (
       !this.archivio.archivio.some((item) => item.posizione === nuovaPosizione)
     ) {
-      this.archivio.inserisci_libro(newLibro, this.as);
+      this.archivio.inserisci_libro(newLibro);
     } else {
       console.log('Posizione già occupata');
     }
